@@ -1,0 +1,32 @@
+name: Python CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master  # Trigger the pipeline on push to the 'master' branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use an Ubuntu runner
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # This checks out your code
+
+    - name: Set up Python
+      uses: actions/setup-python@v2  # Set up Python environment
+      with:
+        python-version: '3.9'  # Use Python 3.9 (adjust if needed)
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt  # Install required Python packages
+
+    - name: Run the app (optional)
+      run: |
+        python app.py  # Run your Flask app (this just starts the app to check it works)
+        
+    # If you add tests later, you can use this step:
+    # - name: Run tests
+    #   run: |
+    #     pytest  # Run pytest if you want to test your app
